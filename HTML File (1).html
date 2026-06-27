@@ -1,0 +1,114 @@
+<<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#09001a,#220033,#000);
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+.card{
+  z-index:2;
+  text-align:center;
+  padding:30px;
+}
+h1{
+  font-size:42px;
+  color:#ffd700;
+  text-shadow:0 0 20px #ffcc00;
+  animation:glow 1.5s infinite alternate;
+}
+#text{
+  margin-top:25px;
+  font-size:24px;
+  line-height:1.6;
+  text-shadow:0 0 12px #00e5ff;
+}
+.cake{
+  font-size:90px;
+  animation:bounce 1s infinite;
+}
+.balloon{
+  position:absolute;
+  bottom:-40px;
+  animation:float linear infinite;
+}
+@keyframes float{
+  to{transform:translateY(-120vh) rotate(360deg);opacity:0}
+}
+@keyframes bounce{
+  50%{transform:translateY(-20px)}
+}
+@keyframes glow{
+  from{text-shadow:0 0 10px #ffd700}
+  to{text-shadow:0 0 30px #ff00ff}
+}
+.final{
+  display:none;
+  margin-top:25px;
+  font-size:28px;
+  color:#00ffff;
+  text-shadow:0 0 20px #00ffff;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="cake">🎂</div>
+  <h1>Happy Birthday Dost 🎉</h1>
+  <div id="text"></div>
+  <div class="final" id="final">🎁 Stay happy, stay blessed! 🎁</div>
+</div>
+
+<script>
+const lines = [
+  "Aaj ka din special hai... 🎉",
+  "Kyuki aaj mere dost ka birthday hai... 😄",
+  "Bhagwan kare tumhari life me hamesha khushi rahe... ✨",
+  "Happy Birthday, mere bhai! 🎂❤️"
+];
+
+let line=0, char=0;
+const box=document.getElementById("text");
+
+function type(){
+  if(line < lines.length){
+    if(char < lines[line].length){
+      box.innerHTML += lines[line].charAt(char);
+      char++;
+      setTimeout(type,50);
+    }else{
+      box.innerHTML += "<br>";
+      line++;
+      char=0;
+      setTimeout(type,700);
+    }
+  }else{
+    document.getElementById("final").style.display="block";
+  }
+}
+type();
+
+const emojis=["🎈","🎉","✨","🎊","💙"];
+for(let i=0;i<80;i++){
+  let b=document.createElement("div");
+  b.className="balloon";
+  b.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+  b.style.left=Math.random()*100+"vw";
+  b.style.fontSize=(18+Math.random()*28)+"px";
+  b.style.animationDuration=(4+Math.random()*6)+"s";
+  b.style.animationDelay=Math.random()*5+"s";
+  document.body.appendChild(b);
+}
+</script>
+
+</body>
+</html>
